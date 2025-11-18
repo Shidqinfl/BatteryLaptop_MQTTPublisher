@@ -1,0 +1,20 @@
+[Unit]
+Description=Battery MQTT Publisher
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/battery_mqtt
+Restart=always
+RestartSec=10
+User=$USER
+Environment=HOME=/home/$USER
+WorkingDirectory=/home/$USER
+
+# Opsional: log ke syslog
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=battery_mqtt
+
+[Install]
+WantedBy=multi-user.target
